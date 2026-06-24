@@ -2,8 +2,7 @@
 
 An interactive, walk-through museum portfolio built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies. Walk through rooms, approach paintings, and view them up close.
 
-**Live site →** [your-url.vercel.app](https://your-url.vercel.app)
-
+**Live site →** [https://subhagallery.vercel.app/]
 ---
 
 ## What it is
