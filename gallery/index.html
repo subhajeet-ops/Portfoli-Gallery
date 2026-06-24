@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Caveat:wght@500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /*
+      Frame sizes are defined here (not in style.css) so they're easy to
+      tweak per-painting without hunting through the main stylesheet.
+
+      Strategy:
+        - Portraits:  width = clamp(140px, 18vw, 220px)
+                      height derived via aspect-ratio property (browser computes it)
+                      max-height capped at 44vh so nothing ever clips into the dado rail
+        - Landscape:  width = clamp(200px, 24vw, 300px)
+                      same aspect-ratio approach, max-height capped at 30vh
+    */
+
+    /* shared cap — nothing taller than 44vh (wall is 66vh, frames start at ~15%) */
+    .frame { max-height: 44vh; }
+
+    /* Frame 1 — Rani Padmini  (791×1077, ratio 1.362 portrait) */
+    #f1 { width: clamp(140px, 18vw, 220px); aspect-ratio: 791 / 1077; }
+
+    /* Frame 2 — Surgical Strike  (773×558, ratio 0.722 landscape) */
+    #f2 { width: clamp(200px, 24vw, 300px); aspect-ratio: 773 / 558;  max-height: 30vh; }
+
+    /* Frame 3 — Splash  (595×876, ratio 1.472 tall portrait) */
+    #f3 { width: clamp(140px, 17vw, 210px); aspect-ratio: 595 / 876; }
+
+    /* Frame 4 — Shershaah  (643×896, ratio 1.393 portrait) */
+    #f4 { width: clamp(140px, 18vw, 220px); aspect-ratio: 643 / 896; }
+
+    /* Frame 5 — Her / Hope  (674×870, ratio 1.291 portrait) */
+    #f5 { width: clamp(140px, 18vw, 220px); aspect-ratio: 674 / 870; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════ HALLWAY ═══════════ -->
+  <div class="scene active" id="hall">
+    <div class="hall-title">✦ The Gallery ✦</div>
+    <div class="hall-sub">choose a room to step inside</div>
+
+    <div class="doors-row">
+      <div class="door-wrap" data-room="room1">
+        <div class="door"><div class="door-roman">I</div></div>
+        <div class="door-label">Paintings</div>
+        <div class="door-sub">Room I</div>
+      </div>
+      <div class="door-wrap locked" data-tip="Coming soon">
+        <div class="door"><div class="door-roman">II</div></div>
+        <div class="door-label">Digital Art</div>
+        <div class="door-sub">Coming soon</div>
+      </div>
+      <div class="door-wrap locked" data-tip="Coming soon">
+        <div class="door"><div class="door-roman">III</div></div>
+        <div class="door-label">About Me</div>
+        <div class="door-sub">Coming soon</div>
+      </div>
+    </div>
+
+    <div class="hall-floor"></div>
+    <div class="hall-hint">click the floor to walk · click a door to enter</div>
+
+    <div id="char-hall">
+      <div class="char-scale-hall">
+        <div class="char-rig" id="hall-rig">
+          <div class="char-shadow-el"></div>
+          <div class="char-leg l"></div><div class="char-leg r"></div>
+          <div class="char-torso"></div>
+          <div class="char-arm l"></div>
+          <div class="char-head"></div>
+          <div class="char-eye l"></div><div class="char-eye r"></div>
+          <div class="char-blush l"></div><div class="char-blush r"></div>
+          <div class="char-cap"></div>
+          <div class="char-hair"></div>
+          <div class="char-arm r"></div>
+        </div>
+      </div>
+      <div class="dog-rig" id="hall-dog">
+        <div class="dog-shadow"></div>
+        <div class="dog-tail"></div>
+        <div class="dog-body"></div>
+        <div class="dog-leg dog-leg-bl"></div><div class="dog-leg dog-leg-br"></div>
+        <div class="dog-leg dog-leg-fl"></div><div class="dog-leg dog-leg-fr"></div>
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-l"></div><div class="dog-ear dog-ear-r"></div>
+          <div class="dog-eye dog-eye-l"></div><div class="dog-eye dog-eye-r"></div>
+          <div class="dog-snout"></div><div class="dog-nose"></div>
+        </div>
+        <div class="dog-collar"></div>
+      </div>
+    </div>
+
+    <div class="locked-tip" id="locked-tip"></div>
+  </div><!-- #hall -->
+
+
+  <!-- ═══════════ ROOM 1 — PAINTINGS ═══════════ -->
+  <div class="scene" id="room1">
+    <div class="room-title">Room I — Paintings</div>
+    <button class="back-btn" id="backBtn">← Hallway</button>
+    <div class="room-hint">← → arrow keys or A / D to walk</div>
+    <div class="exit-hint-pill" id="exitHint">walk through the archway to exit →</div>
+
+    <div id="r1world">
+
+      <!-- structural -->
+      <div class="r1-ceiling"></div>
+      <div class="r1-wall"></div>
+      <div class="r1-dado"></div>
+      <div class="r1-wainscot"></div>
+      <div class="r1-baseboard"></div>
+      <div class="r1-floor"></div>
+      <div class="r1-arch"></div>
+      <div class="r1-arch-label">EXIT →</div>
+      <div class="r1-carpet"></div>
+
+      <!-- spotlights — upper cone -->
+      <div class="spotlight"        style="left:120px;  top:0; width:300px; height:22%;"></div>
+      <div class="frame-halo"       style="left:70px;   top:12%; width:400px; height:380px;"></div>
+      <div class="spotlight"        style="left:590px;  top:0; width:300px; height:27%;"></div>
+      <div class="frame-halo"       style="left:540px;  top:17%; width:400px; height:360px;"></div>
+      <div class="spotlight"        style="left:1020px; top:0; width:300px; height:20%;"></div>
+      <div class="frame-halo"       style="left:970px;  top:10%; width:400px; height:380px;"></div>
+      <div class="spotlight"        style="left:1500px; top:0; width:300px; height:21%;"></div>
+      <div class="frame-halo"       style="left:1450px; top:11%; width:400px; height:370px;"></div>
+      <div class="spotlight"        style="left:1970px; top:0; width:300px; height:22%;"></div>
+      <div class="frame-halo"       style="left:1920px; top:12%; width:400px; height:370px;"></div>
+
+      <!-- spotlights — reflected (lower) -->
+      <div class="spotlight-reflect" style="left:120px;  top:48%; width:300px; height:18%;"></div>
+      <div class="spotlight-reflect" style="left:590px;  top:48%; width:300px; height:18%;"></div>
+      <div class="spotlight-reflect" style="left:1020px; top:48%; width:300px; height:18%;"></div>
+      <div class="spotlight-reflect" style="left:1500px; top:48%; width:300px; height:18%;"></div>
+      <div class="spotlight-reflect" style="left:1970px; top:48%; width:300px; height:18%;"></div>
+
+      <!-- wall sconces (between each pair of frames) -->
+      <div class="wall-sconce" style="left:485px;">
+        <div class="sconce-backplate"></div>
+        <div class="sconce-arm"></div>
+        <div class="sconce-cup">
+          <div class="sconce-flame"><div class="sconce-flame-inner"></div></div>
+          <div class="sconce-glow-halo"></div>
+        </div>
+      </div>
+      <div class="wall-sconce" style="left:975px;">
+        <div class="sconce-backplate"></div>
+        <div class="sconce-arm"></div>
+        <div class="sconce-cup">
+          <div class="sconce-flame"><div class="sconce-flame-inner"></div></div>
+          <div class="sconce-glow-halo"></div>
+        </div>
+      </div>
+      <div class="wall-sconce" style="left:1410px;">
+        <div class="sconce-backplate"></div>
+        <div class="sconce-arm"></div>
+        <div class="sconce-cup">
+          <div class="sconce-flame"><div class="sconce-flame-inner"></div></div>
+          <div class="sconce-glow-halo"></div>
+        </div>
+      </div>
+      <div class="wall-sconce" style="left:1885px;">
+        <div class="sconce-backplate"></div>
+        <div class="sconce-arm"></div>
+        <div class="sconce-cup">
+          <div class="sconce-flame"><div class="sconce-flame-inner"></div></div>
+          <div class="sconce-glow-halo"></div>
+        </div>
+      </div>
+
+      <!-- museum barrier rail -->
+      <div class="barrier-rail" style="left:20px; bottom:17%; width:2380px;">
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div><div class="barrier-rope"></div>
+        <div class="barrier-post"></div>
+      </div>
+
+      <!-- floating orbs -->
+      <div class="orb" style="left:80px;   bottom:38%; animation-duration:5.2s; animation-delay:0s;"></div>
+      <div class="orb" style="left:220px;  bottom:42%; animation-duration:6.8s; animation-delay:.8s;"></div>
+      <div class="orb" style="left:450px;  bottom:35%; animation-duration:4.9s; animation-delay:1.5s;"></div>
+      <div class="orb" style="left:700px;  bottom:45%; animation-duration:7.1s; animation-delay:.3s;"></div>
+      <div class="orb" style="left:900px;  bottom:38%; animation-duration:5.8s; animation-delay:2s;"></div>
+      <div class="orb" style="left:1150px; bottom:40%; animation-duration:6.3s; animation-delay:.6s;"></div>
+      <div class="orb" style="left:1350px; bottom:36%; animation-duration:5.0s; animation-delay:1.2s;"></div>
+      <div class="orb" style="left:1600px; bottom:43%; animation-duration:7.4s; animation-delay:2.5s;"></div>
+      <div class="orb" style="left:1800px; bottom:38%; animation-duration:5.6s; animation-delay:.4s;"></div>
+      <div class="orb" style="left:2050px; bottom:41%; animation-duration:6.1s; animation-delay:1.8s;"></div>
+      <div class="orb" style="left:2250px; bottom:36%; animation-duration:4.7s; animation-delay:.9s;"></div>
+
+      <!-- ── PAINTINGS ──────────────────────────────────────────────────────
+           Frames use CSS aspect-ratio (defined in <style> above) so height
+           is always proportional to the actual painting — no cropping ever.
+           Vertical position (top:%) is set here; adjust per painting as needed.
+      ─────────────────────────────────────────────────────────────────────── -->
+
+      <!-- Frame 1: Rani Padmini — portrait 791×1077 -->
+      <div id="f1" class="frame" style="left:160px; top:17%;"
+           data-title="Rani Padmini"
+           data-desc="A portrayal of Rani Padmavati — grace, strength, and historical significance through intricate ornamentation, rich detailing, and a regal composition. Her presence commands silence.">
+        <div class="frame-border"></div>
+        <div class="frame-mat">
+          <img src="assets/paintings/padmavati.jpg" alt="Rani Padmini">
+        </div>
+        <div class="frame-label-plate">Rani Padmini</div>
+      </div>
+
+      <!-- Frame 2: Surgical Strike — landscape 773×558 -->
+      <div id="f2" class="frame" style="left:600px; top:24%;"
+           data-title="Surgical Strike"
+           data-desc="Inspired by Operation Sindoor, this artwork captures determination, leadership, and intensity under pressure — the courage and unwavering commitment of those who stand in defense of the nation.">
+        <div class="frame-border"></div>
+        <div class="frame-mat">
+          <img src="assets/paintings/howsthejosh.png" alt="Surgical Strike">
+        </div>
+        <div class="frame-label-plate">Surgical Strike</div>
+      </div>
+
+      <!-- Frame 3: Splash — tall portrait 595×876 -->
+      <div id="f3" class="frame" style="left:1070px; top:15%;"
+           data-title="Splash"
+           data-desc="A vibrant portrait capturing uninhibited happiness through expressive colors, dynamic highlights, and fluid textures. It celebrates innocence, freedom, and the simple moments that define youthful joy.">
+        <div class="frame-border"></div>
+        <div class="frame-mat">
+          <img src="assets/paintings/splash.png" alt="Splash">
+        </div>
+        <div class="frame-label-plate">Splash</div>
+      </div>
+
+      <!-- Frame 4: Shershaah — portrait 643×896 -->
+      <div id="f4" class="frame" style="left:1550px; top:17%;"
+           data-title="Shershaah"
+           data-desc="A tribute to one of India's most celebrated war heroes. Through realism and expressive detailing, the artwork honors his legacy of patriotism, resilience, and service to the nation.">
+        <div class="frame-border"></div>
+        <div class="frame-mat">
+          <img src="assets/paintings/shershaah.png" alt="Shershaah">
+        </div>
+        <div class="frame-label-plate">Shershaah</div>
+      </div>
+
+      <!-- Frame 5: Her / Hope — portrait 674×870 -->
+      <div id="f5" class="frame" style="left:2020px; top:17%;"
+           data-title="Her / Hope"
+           data-desc="A monochromatic portrait exploring vulnerability through expressive eyes and meticulous graphite detailing. The subject's gaze conveys a quiet blend of sorrow, resilience, and hope.">
+        <div class="frame-border"></div>
+        <div class="frame-mat">
+          <img src="assets/paintings/girl.png" alt="Her / Hope">
+        </div>
+        <div class="frame-label-plate">Her · Hope</div>
+      </div>
+
+    </div><!-- #r1world -->
+
+    <!-- character + dog (screen-space) -->
+    <div id="char-room1">
+      <div class="char-scale-r1">
+        <div class="char-rig" id="r1-rig">
+          <div class="char-shadow-el"></div>
+          <div class="char-leg l"></div><div class="char-leg r"></div>
+          <div class="char-torso"></div>
+          <div class="char-arm l"></div>
+          <div class="char-head"></div>
+          <div class="char-eye l"></div><div class="char-eye r"></div>
+          <div class="char-blush l"></div><div class="char-blush r"></div>
+          <div class="char-cap"></div>
+          <div class="char-hair"></div>
+          <div class="char-arm r"></div>
+        </div>
+      </div>
+      <div class="dog-rig" id="r1-dog">
+        <div class="dog-shadow"></div>
+        <div class="dog-tail"></div>
+        <div class="dog-body"></div>
+        <div class="dog-leg dog-leg-bl"></div><div class="dog-leg dog-leg-br"></div>
+        <div class="dog-leg dog-leg-fl"></div><div class="dog-leg dog-leg-fr"></div>
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-l"></div><div class="dog-ear dog-ear-r"></div>
+          <div class="dog-eye dog-eye-l"></div><div class="dog-eye dog-eye-r"></div>
+          <div class="dog-snout"></div><div class="dog-nose"></div>
+        </div>
+        <div class="dog-collar"></div>
+      </div>
+    </div>
+
+    <div class="mobile-controls">
+      <button id="btnLeft">◀</button>
+      <button id="btnRight">▶</button>
+    </div>
+  </div><!-- #room1 -->
+
+
+  <!-- ═══════════ FRAME OVERLAY ═══════════ -->
+  <div id="frame-overlay">
+    <button class="overlay-close" id="overlayClose">✕</button>
+    <div id="overlay-frame">
+      <img id="overlay-img" alt="">
+    </div>
+    <div id="overlay-note">
+      <div class="note-lines"></div>
+      <div class="note-content">
+        <span class="note-icon">✦</span>
+        <div class="note-title" id="note-title">Title</div>
+        <div class="note-quote" id="note-quote"></div>
+        <div class="note-body"  id="note-body">Description.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #app -->
+
+<script src="js/main.js"></script>
+</body>
+</html>
