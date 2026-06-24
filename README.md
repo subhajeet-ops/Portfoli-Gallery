@@ -1,54 +1,87 @@
-# The Gallery
+# ✦ The Gallery
 
-Interactive museum portfolio — walk through rooms, view paintings.
+An interactive, walk-through museum portfolio built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies. Walk through rooms, approach paintings, and view them up close.
 
-## Structure
+**Live site →** [your-url.vercel.app](https://your-url.vercel.app)
+
+---
+
+## What it is
+
+A browser-based gallery where a character (and their dog) walks through museum rooms. Each room holds a collection of artworks — click any painting to open a full detail view with title, quote, and description.
+
+Currently live:
+- **Room I — Paintings** · graphite & colour pencil works
+
+Coming soon:
+- **Room II — Digital Art**
+- **Room III — About Me**
+
+---
+
+## Controls
+
+| Action | How |
+|---|---|
+| Walk in hallway | Click the floor |
+| Enter a room | Click a door |
+| Move in room | Arrow keys or `A` / `D` |
+| View a painting | Click on it |
+| Close detail view | `Escape` or ✕ |
+| Exit room | Walk to the far right arch |
+| Mobile | ◀ ▶ buttons on screen |
+
+---
+
+## Project structure
 
 ```
-gallery/
-├── index.html              ← markup only (~8KB)
+Portfoli-Gallery/
+├── index.html              ← all markup
+├── README.md
 ├── css/
 │   └── style.css           ← all styles
 ├── js/
 │   └── main.js             ← all game logic
 └── assets/
-    └── paintings/          ← Room I images
-        ├── padmavati.jpg
-        ├── howsthejosh.png
-        ├── splash.png
-        ├── shershaah.png
-        └── girl.png
+    ├── paintings/          ← Room I images
+    │   ├── padmavati.jpg
+    │   ├── howsthejosh.png
+    │   ├── splash.png
+    │   ├── shershaah.png
+    │   └── girl.png
+    └── digital/            ← Room II images (coming soon)
 ```
 
-## Adding Room 2
+---
 
-1. Add images to `assets/digital/` (or whatever the room theme is)
-2. Add a new `<div class="scene" id="room2">` block in `index.html`
-3. Add a `room2.js` in `js/` and include it with `<script src="js/room2.js">`
-4. Add `room2.css` in `css/` if the room needs unique styles
-5. Unlock the Door II in the hallway: remove `locked` class, set `data-room="room2"`
+## Adding a new room
 
-## Deploy to GitHub Pages
+1. Add images to `assets/your-room-theme/`
+2. Add a `<div class="scene" id="roomN">` block in `index.html`
+3. Unlock the door in the hallway — remove `locked` class, set `data-room="roomN"`
+4. Add room logic to `js/main.js` (copy the Room 2 template)
+5. Push to GitHub → Vercel auto-deploys
+
+---
+
+## Deploying
+
+Hosted on **Vercel**, connected to this GitHub repo. Every push to `main` triggers an automatic redeploy.
 
 ```bash
-git init
+# after making changes
 git add .
-git commit -m "initial gallery"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/gallery.git
-git push -u origin main
+git commit -m "your message"
+git push
 ```
-Then in GitHub → Settings → Pages → Source: `main` branch, `/ (root)`.
 
-## Deploy to Netlify
+---
 
-Drag and drop the `gallery/` folder onto netlify.com/drop — live in seconds.
+## Tech
 
-## Controls
+Pure HTML · CSS · Vanilla JavaScript · Zero dependencies · Zero frameworks
 
-- **Click floor** (hallway) — walk to position  
-- **Click door** — enter room  
-- **Arrow keys / A D** — move in room  
-- **Click painting** — open detail overlay  
-- **Escape / ✕** — close overlay  
-- **Walk to far right arch** — exit room  
+---
+
+*Built by [@subhajeet-ops](https://github.com/subhajeet-ops)*
