@@ -9,6 +9,8 @@
   <meta property="og:title" content="The Gallery — Subhajeet Mishra">
   <meta property="og:description" content="Step inside a walkable art gallery — paintings, digital art, and the story behind the work.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-preview.jpg">
+  <meta property="og:url" content="https://portfoli-gallery.vercel.app">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cinzel:wght@500;700&family=Caveat:wght@500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
@@ -120,7 +122,6 @@
     <button class="back-btn" data-back>← Hallway</button>
     <div class="room-hint">← → arrow keys or A / D to walk</div>
     <div class="exit-hint-pill" id="exitHint">walk through the archway to exit →</div>
-    <div class="mobile-controls"><button data-mob="left" aria-label="Walk left">◀</button><button data-mob="right" aria-label="Walk right">▶</button></div>
     <div class="exit-nav" id="exitNav1">
       <button class="exit-nav-btn" id="exitNavGallery1">← Back to Gallery</button>
       <button class="exit-nav-btn exit-nav-btn-next" id="exitNavToRoom2">Go to Room II →</button>
@@ -277,7 +278,6 @@
     <button class="back-btn back-btn-celestial" data-back>← Hallway</button>
     <div class="room-hint r2-hint">← → arrow keys or A / D to walk · look down at the obsidian</div>
     <div class="exit-hint-pill exit-hint-pill-celestial" id="exitHint2">walk through the archway to exit →</div>
-    <div class="mobile-controls"><button data-mob="left" aria-label="Walk left">◀</button><button data-mob="right" aria-label="Walk right">▶</button></div>
     <div class="exit-nav exit-nav-celestial" id="exitNav2">
       <button class="exit-nav-btn exit-nav-btn-prev" id="exitNavToRoom1">← Room I</button>
       <button class="exit-nav-btn" id="exitNavGallery2">Back to Gallery</button>
@@ -850,66 +850,6 @@
         </div>
 
 
-        <!-- ══ MOBILE TAB UI — inside house, fixed overlay on mobile ══ -->
-        <div class="r3-tabs-ui" id="r3TabsUI">
-          <div class="r3-sheet-handle" id="r3SheetHandle" role="button" tabindex="0" aria-label="Drag up to open the menu, drag down to close it" aria-expanded="false">
-            <span class="r3-sheet-grip"></span>
-          </div>
-          <div class="r3-tab-bar">
-            <button class="r3-tab active" data-tab="stage">Stage</button>
-            <button class="r3-tab" data-tab="achievements">Achievements</button>
-            <button class="r3-tab" data-tab="kraftovity">Kraftovity</button>
-          </div>
-          <div class="r3-tab-panel active" id="r3tab-stage">
-            <div class="r3-tab-stage-nav">
-              <div class="r3-tab-stage-nav-row">
-                <button id="r3TabNavRoom1">⟵ Room I</button>
-                <button id="r3TabNavRoom2">⟵ Room II</button>
-              </div>
-              <div class="r3-tab-contact-title">Contact Me</div>
-              <div class="r3-tab-stage-nav-row">
-                <a href="https://www.instagram.com/subhaaaaa_/" target="_blank" rel="noopener">Instagram</a>
-                <a href="mailto:subhajeet07mishra@gmail.com">Email</a>
-                <a href="https://www.linkedin.com/in/subhajeet-mishra-a531a4311/" target="_blank" rel="noopener">LinkedIn</a>
-              </div>
-            </div>
-          </div>
-          <div class="r3-tab-panel" id="r3tab-achievements">
-            <div class="r3-tab-frame" data-title="Portrait for Vishal Batra" data-desc="Presenting my portrait of Vishal Batra, the brother of Captain Vikram Batra, was one of the biggest milestones in my artistic journey. Ever since I was a kid, I loved drawing portraits. I always wondered how it would feel if the person I drew actually saw my artwork — this moment felt like that childhood dream finally coming true." data-quote="A childhood dream, finally coming true.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/vishal-batra-portrait.jpeg" alt="Portrait for Vishal Batra"></div>
-              <div class="r3-tab-frame-plate">Portrait for Vishal Batra</div>
-            </div>
-            <div class="r3-tab-frame" data-title="First Medal — Splash" data-desc="I have been holding crayons and brushes ever since I was a kid. It was not until Splash by Axis Bank that I finally received my first medal — a Silver Medal. This small milestone always brings a smile to my face." data-quote="Believe in yourself — dedication always gets you there.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/first-medal.jpeg" alt="First Medal"></div>
-              <div class="r3-tab-frame-plate">First Medal — Splash</div>
-            </div>
-          </div>
-          <div class="r3-tab-panel" id="r3tab-kraftovity">
-            <div class="r3-tab-frame" data-title="KIIT Fest 9.0" data-desc="Celebrating the successful completion of KIIT Fest 9.0 with an amazing team and unforgettable memories." data-quote="Creativity is intelligence having fun.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/kiit-fest-9.jpeg" alt="KIIT Fest 9.0"></div>
-              <div class="r3-tab-frame-plate">KIIT Fest 9.0</div>
-            </div>
-            <div class="r3-tab-frame" data-title="Face Painting — IIT KGP" data-desc="We participated in the face painting event hosted by IIT Kharagpur during their Spring Fest." data-quote="Every brush stroke is a heartbeat on canvas.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/face-painting-iit-kgp.jpeg" alt="Face Painting IIT KGP"></div>
-              <div class="r3-tab-frame-plate">Face Painting — IIT KGP</div>
-            </div>
-            <div class="r3-tab-frame" data-title="Meeting Padma Shri Adwaita Gadanayak" data-desc="A workshop hosted by Kraftovity where we got to meet Padma Shri awardee and renowned sculptor Adwaita Gadanayak." data-quote="Make visible what, without you, might never have been seen.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/adwaita-gadanayak.jpeg" alt="Adwaita Gadanayak"></div>
-              <div class="r3-tab-frame-plate">Padma Shri Adwaita Gadanayak</div>
-            </div>
-            <div class="r3-tab-frame" data-title="Kraftovity Decorations" data-desc="A glimpse of events decorated by Kraftovity — Halloween, Sharod Agamoni, Kritarth, and MasterChef." data-quote="Art washes from the soul the dust of everyday life.">
-              <div class="r3-tab-frame-border"></div>
-              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/decorations.jpeg" alt="Kraftovity Decorations"></div>
-              <div class="r3-tab-frame-plate">Kraftovity Decorations</div>
-            </div>
-            <p class="r3-tab-kv-quote">"A place that helped me reconnect with a part of myself I thought I had left behind. More than just a society, I found a family that made every moment meaningful."</p>
-          </div>
-        </div>
 
       </div><!-- .r3-house -->
     </div><!-- .r3-camera -->
@@ -1020,6 +960,68 @@
       <img id="mobFrameImg" src="" alt="">
       <div id="mobFrameTitle"></div>
       <div id="mobFrameDesc"></div>
+    </div>
+  </div>
+
+
+  <!-- ══ MOBILE TAB UI — hoisted to #app level so overflow:hidden on #room3 cannot clip it ══ -->
+  <div class="r3-tabs-ui" id="r3TabsUI">
+    <div class="r3-sheet-handle" id="r3SheetHandle" role="button" tabindex="0" aria-label="Drag up to open the menu, drag down to close it" aria-expanded="false">
+      <span class="r3-sheet-grip"></span>
+    </div>
+    <div class="r3-tab-bar">
+      <button class="r3-tab active" data-tab="stage">Stage</button>
+      <button class="r3-tab" data-tab="achievements">Achievements</button>
+      <button class="r3-tab" data-tab="kraftovity">Kraftovity</button>
+    </div>
+    <div class="r3-tab-panel active" id="r3tab-stage">
+      <div class="r3-tab-stage-nav">
+        <div class="r3-tab-stage-nav-row">
+    <button id="r3TabNavRoom1">⟵ Room I</button>
+    <button id="r3TabNavRoom2">⟵ Room II</button>
+        </div>
+        <div class="r3-tab-contact-title">Contact Me</div>
+        <div class="r3-tab-stage-nav-row">
+    <a href="https://www.instagram.com/subhaaaaa_/" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:subhajeet07mishra@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/subhajeet-mishra-a531a4311/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="r3-tab-panel" id="r3tab-achievements">
+      <div class="r3-tab-frame" data-title="Portrait for Vishal Batra" data-desc="Presenting my portrait of Vishal Batra, the brother of Captain Vikram Batra, was one of the biggest milestones in my artistic journey. Ever since I was a kid, I loved drawing portraits. I always wondered how it would feel if the person I drew actually saw my artwork — this moment felt like that childhood dream finally coming true." data-quote="A childhood dream, finally coming true.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/vishal-batra-portrait.jpeg" alt="Portrait for Vishal Batra"></div>
+        <div class="r3-tab-frame-plate">Portrait for Vishal Batra</div>
+      </div>
+      <div class="r3-tab-frame" data-title="First Medal — Splash" data-desc="I have been holding crayons and brushes ever since I was a kid. It was not until Splash by Axis Bank that I finally received my first medal — a Silver Medal. This small milestone always brings a smile to my face." data-quote="Believe in yourself — dedication always gets you there.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/first-medal.jpeg" alt="First Medal"></div>
+        <div class="r3-tab-frame-plate">First Medal — Splash</div>
+      </div>
+    </div>
+    <div class="r3-tab-panel" id="r3tab-kraftovity">
+      <div class="r3-tab-frame" data-title="KIIT Fest 9.0" data-desc="Celebrating the successful completion of KIIT Fest 9.0 with an amazing team and unforgettable memories." data-quote="Creativity is intelligence having fun.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/kiit-fest-9.jpeg" alt="KIIT Fest 9.0"></div>
+        <div class="r3-tab-frame-plate">KIIT Fest 9.0</div>
+      </div>
+      <div class="r3-tab-frame" data-title="Face Painting — IIT KGP" data-desc="We participated in the face painting event hosted by IIT Kharagpur during their Spring Fest." data-quote="Every brush stroke is a heartbeat on canvas.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/face-painting-iit-kgp.jpeg" alt="Face Painting IIT KGP"></div>
+        <div class="r3-tab-frame-plate">Face Painting — IIT KGP</div>
+      </div>
+      <div class="r3-tab-frame" data-title="Meeting Padma Shri Adwaita Gadanayak" data-desc="A workshop hosted by Kraftovity where we got to meet Padma Shri awardee and renowned sculptor Adwaita Gadanayak." data-quote="Make visible what, without you, might never have been seen.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/adwaita-gadanayak.jpeg" alt="Adwaita Gadanayak"></div>
+        <div class="r3-tab-frame-plate">Padma Shri Adwaita Gadanayak</div>
+      </div>
+      <div class="r3-tab-frame" data-title="Kraftovity Decorations" data-desc="A glimpse of events decorated by Kraftovity — Halloween, Sharod Agamoni, Kritarth, and MasterChef." data-quote="Art washes from the soul the dust of everyday life.">
+        <div class="r3-tab-frame-border"></div>
+        <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/decorations.jpeg" alt="Kraftovity Decorations"></div>
+        <div class="r3-tab-frame-plate">Kraftovity Decorations</div>
+      </div>
+      <p class="r3-tab-kv-quote">"A place that helped me reconnect with a part of myself I thought I had left behind. More than just a society, I found a family that made every moment meaningful."</p>
     </div>
   </div>
 
