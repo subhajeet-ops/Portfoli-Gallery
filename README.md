@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✦ The Gallery
+# ✦ The Gallery ✦
 
 *"Every artwork deserves more than a scroll. It deserves a room."*
 
